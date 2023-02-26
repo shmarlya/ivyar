@@ -13,7 +13,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: ivyar-web-api # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: 'dist/apps/${{ env.AZURE_WEBAPP_NAME }}' # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: dist/apps/ivyar-web-api # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '18.14.0' # set this to the node version to use
 
 jobs:
