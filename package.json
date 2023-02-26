@@ -2,13 +2,22 @@
   "name": "ivyar",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install",
+    "build_ivyar-web-api": "yarn nx build ivyar-web-api --configuration=production",
+    "build_all": "yarn nx run-many --target=build --all=true"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn nx run-many --target=lint --all=true",
+      "pre-push": "yarn nx run-many --target=build --all=true"
+    }
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "9.0.0",
     "@nestjs/core": "9.0.0",
     "@nestjs/platform-express": "9.0.0",
-    "axios": "^1.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reflect-metadata": "0.1.13",
@@ -50,6 +59,7 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "jsdom": "~20.0.3",
