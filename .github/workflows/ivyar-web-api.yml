@@ -14,7 +14,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: ivyar-web-api # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: dist/apps/ivyar-web-api # set this to the path to your web app project, defaults to the repository root
-  AZURE_WEBAPP_MODULES_PATH: node_modules
+  AZURE_WEBAPP_MODULES_PATH: package.json
   # AZURE_WEBAPP_DEPLOY_ID: ivyar-web-api-deploy-id
   NODE_VERSION: '18.14.0' # set this to the node version to use
 
@@ -66,3 +66,6 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
+      - name: install dependencies
+        run: yarn install
