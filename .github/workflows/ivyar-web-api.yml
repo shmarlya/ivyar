@@ -61,3 +61,9 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
+
+      - name: Unzip build
+        run: unzip ${{ env.AZURE_WEBAPP_NAME }}.zip
+
+      - name: Remove zip archive
+        run: rm ${{ env.AZURE_WEBAPP_NAME }}.zip
