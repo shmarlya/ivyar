@@ -14,12 +14,13 @@ on:
 env:
   AZURE_WEBAPP_NAME: ivyar-web-api # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: dist/apps/ivyar-web-api # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_MODULES_PATH: node_modules
   # AZURE_WEBAPP_DEPLOY_ID: ivyar-web-api-deploy-id
   NODE_VERSION: '18.14.0' # set this to the node version to use
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -38,7 +39,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          path: |
+            ${{ env.AZURE_WEBAPP_MODULES_PATH }}
+            ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy:
     runs-on: ubuntu-latest
