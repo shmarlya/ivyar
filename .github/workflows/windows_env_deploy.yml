@@ -52,6 +52,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
+          
+      - name: Unzip build
+        run: Expand-Archive -LiteralPath ${{ env.AZURE_WEBAPP_NAME }}.zip -DestinationPath .
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
