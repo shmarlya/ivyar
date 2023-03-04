@@ -43,7 +43,7 @@ jobs:
           path: ${{ env.AZURE_WEBAPP_NAME }}.zip
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
 
     steps:
@@ -53,11 +53,16 @@ jobs:
           name: ${{ env.AZURE_WEBAPP_NAME }}
           
       - name: Unzip build
-        run: Expand-Archive -LiteralPath ${{ env.AZURE_WEBAPP_NAME }}.zip -DestinationPath . -Force
+        run: unzip ${{ env.AZURE_WEBAPP_NAME }}.zip
+
+      - name: Remove zip archive
+        run: rm ${{ env.AZURE_WEBAPP_NAME }}.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         # id: ${{ env.AZURE_WEBAPP_DEPLOY_ID }}
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_WINDOWS }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          id: ${{ env.AZURE_WEBAPP_NAME }}
+          package: .
