@@ -53,12 +53,6 @@ jobs:
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
 
-      - name: Unzip build
-        run: unzip ${{ env.AZURE_WEBAPP_NAME }}.zip
-
-      - name: Remove zip archive
-        run: rm ${{ env.AZURE_WEBAPP_NAME }}.zip
-
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         # id: ${{ env.AZURE_WEBAPP_DEPLOY_ID }}
