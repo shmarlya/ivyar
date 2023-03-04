@@ -33,14 +33,11 @@ jobs:
           yarn install
           yarn run build_all --if-present
 
-      - name: Zip build
-        run: zip -r ${{ env.AZURE_WEBAPP_NAME }}.zip ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
-          path: ${{ env.AZURE_WEBAPP_NAME }}.zip
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,16 +49,9 @@ jobs:
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
           
-      - name: Unzip build
-        run: unzip ${{ env.AZURE_WEBAPP_NAME }}.zip
-
-      - name: Remove zip archive
-        run: rm ${{ env.AZURE_WEBAPP_NAME }}.zip
-
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         # id: ${{ env.AZURE_WEBAPP_DEPLOY_ID }}
         with:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_WINDOWS }}
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          package: .
