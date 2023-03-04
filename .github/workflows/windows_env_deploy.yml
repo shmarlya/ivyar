@@ -64,5 +64,4 @@ jobs:
         with:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_WINDOWS }}
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          id: ${{ env.AZURE_WEBAPP_NAME }}
           package: .
