@@ -40,8 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
-          path: |
-            ${{ env.AZURE_WEBAPP_NAME }}.zip
+          path: ${{ env.AZURE_WEBAPP_NAME }}.zip
 
   deploy:
     runs-on: windows-latest
@@ -54,7 +53,7 @@ jobs:
           name: ${{ env.AZURE_WEBAPP_NAME }}
           
       - name: Unzip build
-        run: Expand-Archive -LiteralPath ${{ env.AZURE_WEBAPP_NAME }}.zip -DestinationPath .
+        run: Expand-Archive -LiteralPath ${{ env.AZURE_WEBAPP_NAME }}.zip -DestinationPath . -Force
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
