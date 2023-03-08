@@ -3,7 +3,7 @@
 # More https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions
 # More https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
-name: Build and deploy Node.js app to Azure Web App - ivyar-web-api
+name: Build and deploy app
 
 on:
   pull_request:
@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: ivyar-web-api # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: dist/apps/ivyar-web-api # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_NAME: ivyar-web # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: . # set this to the path to your web app project, defaults to the repository root
   AZURE_WEBAPP_MODULES_PATH: node_modules
   # AZURE_WEBAPP_DEPLOY_ID: ivyar-web-api-deploy-id
   NODE_VERSION: '18.14.0' # set this to the node version to use
@@ -63,7 +63,6 @@ jobs:
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
-        # id: ${{ env.AZURE_WEBAPP_DEPLOY_ID }}
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
