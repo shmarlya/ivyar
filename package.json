@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "build_ivyar-web-api": "yarn nx build ivyar-web-api --configuration=production",
+    "serve:server:dev": "yarn nx run ivyar-web-api:serve",
+    "serve:client:dev": "yarn nx build ivyar-web-client --watch",
     "build_all": "yarn nx run-many --target=build --all=true"
   },
   "husky": {

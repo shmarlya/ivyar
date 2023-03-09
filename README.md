@@ -13,3 +13,9 @@ npm 9.3.1
 ```
 npx create-nx-workspace@latest ivyar --preset=ts --packageManager=yarn
 ```
+
+### azure configuration start up command:
+
+```
+pm2 start dist/apps/ivyar-web-api/main.js --no-daemon
+```
